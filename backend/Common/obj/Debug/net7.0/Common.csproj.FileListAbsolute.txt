@@ -1,0 +1,12 @@
+D:\Test\FSCRUD\backend\Common\obj\Debug\net7.0\Common.csproj.AssemblyReference.cache
+D:\Test\FSCRUD\backend\Common\obj\Debug\net7.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\Test\FSCRUD\backend\Common\obj\Debug\net7.0\Common.AssemblyInfoInputs.cache
+D:\Test\FSCRUD\backend\Common\obj\Debug\net7.0\Common.AssemblyInfo.cs
+D:\Test\FSCRUD\backend\Common\obj\Debug\net7.0\Common.csproj.CoreCompileInputs.cache
+D:\Test\FSCRUD\backend\Common\bin\Debug\net7.0\Common.deps.json
+D:\Test\FSCRUD\backend\Common\bin\Debug\net7.0\Common.dll
+D:\Test\FSCRUD\backend\Common\bin\Debug\net7.0\Common.pdb
+D:\Test\FSCRUD\backend\Common\obj\Debug\net7.0\Common.dll
+D:\Test\FSCRUD\backend\Common\obj\Debug\net7.0\refint\Common.dll
+D:\Test\FSCRUD\backend\Common\obj\Debug\net7.0\Common.pdb
+D:\Test\FSCRUD\backend\Common\obj\Debug\net7.0\ref\Common.dll
