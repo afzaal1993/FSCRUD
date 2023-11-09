@@ -1907,19 +1907,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mafaroq\\.nuget\\packages\\": {}
+    "C:\\Users\\afzaal\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Test\\FSCRUD\\backend\\Core\\Core.csproj",
-      "projectName": "Core",
-      "projectPath": "D:\\Test\\FSCRUD\\backend\\Core\\Core.csproj",
-      "packagesPath": "C:\\Users\\mafaroq\\.nuget\\packages\\",
-      "outputPath": "D:\\Test\\FSCRUD\\backend\\Core\\obj\\",
+      "projectUniqueName": "D:\\FSCRUD\\backend\\core\\core.csproj",
+      "projectName": "core",
+      "projectPath": "D:\\FSCRUD\\backend\\core\\core.csproj",
+      "packagesPath": "C:\\Users\\afzaal\\.nuget\\packages\\",
+      "outputPath": "D:\\FSCRUD\\backend\\core\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\mafaroq\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\afzaal\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1933,8 +1937,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\Test\\FSCRUD\\backend\\Common\\Common.csproj": {
-              "projectPath": "D:\\Test\\FSCRUD\\backend\\Common\\Common.csproj"
+            "D:\\FSCRUD\\backend\\Common\\Common.csproj": {
+              "projectPath": "D:\\FSCRUD\\backend\\Common\\Common.csproj"
             }
           }
         }
@@ -1999,7 +2003,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

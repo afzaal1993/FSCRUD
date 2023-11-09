@@ -65,7 +65,7 @@ namespace Core.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly>("DateOfBirth")
+                    b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
@@ -94,16 +94,16 @@ namespace Core.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateOnly>("CourseEndDate")
+                    b.Property<DateTime>("CourseEndDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("CourseId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateOnly>("CourseStartDate")
+                    b.Property<DateTime>("CourseStartDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly>("EnrollDate")
+                    b.Property<DateTime>("EnrollDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("StudentId")

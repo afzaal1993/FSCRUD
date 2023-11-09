@@ -10,3 +10,14 @@ D:\Test\FSCRUD\backend\Common\obj\Debug\net7.0\Common.dll
 D:\Test\FSCRUD\backend\Common\obj\Debug\net7.0\refint\Common.dll
 D:\Test\FSCRUD\backend\Common\obj\Debug\net7.0\Common.pdb
 D:\Test\FSCRUD\backend\Common\obj\Debug\net7.0\ref\Common.dll
+D:\FSCRUD\backend\Common\bin\Debug\net7.0\Common.deps.json
+D:\FSCRUD\backend\Common\bin\Debug\net7.0\Common.dll
+D:\FSCRUD\backend\Common\bin\Debug\net7.0\Common.pdb
+D:\FSCRUD\backend\Common\obj\Debug\net7.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\FSCRUD\backend\Common\obj\Debug\net7.0\Common.AssemblyInfoInputs.cache
+D:\FSCRUD\backend\Common\obj\Debug\net7.0\Common.AssemblyInfo.cs
+D:\FSCRUD\backend\Common\obj\Debug\net7.0\Common.csproj.CoreCompileInputs.cache
+D:\FSCRUD\backend\Common\obj\Debug\net7.0\Common.dll
+D:\FSCRUD\backend\Common\obj\Debug\net7.0\refint\Common.dll
+D:\FSCRUD\backend\Common\obj\Debug\net7.0\Common.pdb
+D:\FSCRUD\backend\Common\obj\Debug\net7.0\ref\Common.dll

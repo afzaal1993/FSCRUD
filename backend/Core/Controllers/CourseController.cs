@@ -67,10 +67,10 @@ namespace Core.Controllers
 
         [HttpGet]
         [Route("GetAll")]
-        [ProducesResponseType(typeof(ApiResponse<GetCourseDto>), 200)]
+        [ProducesResponseType(typeof(ApiResponse<List<GetCourseDto>>), 200)]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _dbContext.Courses.ToListAsync();
+            var result = await _dbContext.Courses.Include(x => x.Batch).ToListAsync();
 
             if (result == null)
                 return BadRequest(ApiResponse<string>.Error("Error Occurred"));
@@ -81,6 +81,21 @@ namespace Core.Controllers
             var dto = _mapper.Map<List<GetCourseDto>>(result);
 
             return Ok(ApiResponse<List<GetCourseDto>>.Success(dto));
+        }
+
+        [HttpGet]
+        [Route("GetById")]
+        [ProducesResponseType(typeof(ApiResponse<GetCourseDto>), 200)]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await _dbContext.Courses.Include(x => x.Batch).FirstOrDefaultAsync(y => y.Id == id);
+
+            if (result == null)
+                return NotFound(ApiResponse<string>.NotFound());
+
+            var dto = _mapper.Map<GetCourseDto>(result);
+
+            return Ok(ApiResponse<GetCourseDto>.Success(dto));
         }
     }
 }

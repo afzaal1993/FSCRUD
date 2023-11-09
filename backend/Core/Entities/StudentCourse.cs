@@ -12,8 +12,8 @@ namespace Core.Entities
         public Student Student { get; set; }
         public int CourseId { get; set; }
         public Course Course { get; set; }
-        public DateOnly EnrollDate { get; set; }
-        public DateOnly CourseStartDate { get; set; }
-        public DateOnly CourseEndDate { get; set; }
+        public DateTime EnrollDate { get; set; }
+        public DateTime CourseStartDate { get; set; }
+        public DateTime CourseEndDate { get; set; }
     }
 }
