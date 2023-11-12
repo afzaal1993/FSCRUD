@@ -7,7 +7,7 @@ namespace Core.DTOs
 {
     public class CourseDto
     {
-        public int BatchId { get; set; }
+        public string BatchId { get; set; }
         public string CourseName { get; set; }
         public decimal CourseFee { get; set; }
         public bool IsActive { get; set; }

@@ -1,3 +1,5 @@
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +9,10 @@ namespace Core.Entities
 {
     public class Course
     {
-        public int Id { get; set; }
-        public int BatchId { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+        public string BatchId { get; set; }
         public Batch Batch { get; set; }
         public string CourseName { get; set; }
         public decimal CourseFee { get; set; }

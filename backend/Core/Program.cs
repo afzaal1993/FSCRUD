@@ -1,5 +1,11 @@
+using core.Helpers;
 using Core.Data;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver.Core.Configuration;
+using MongoDB.Driver;
+using core.Data;
+using static Dapper.SqlMapper;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +19,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CoreDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+var mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbConfig)).Get<MongoDbConfig>();
+builder.Services.AddSingleton<MongoDBContext>(serviceProvider =>
+{
+    return new MongoDBContext(mongoDbSettings.ConnectionString, mongoDbSettings.Name);
+});
 
 //RabbitMQ CAP Library
 //builder.Services.AddCap(options =>

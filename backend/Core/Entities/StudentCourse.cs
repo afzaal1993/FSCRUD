@@ -1,3 +1,5 @@
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,9 @@ namespace Core.Entities
 {
     public class StudentCourse
     {
-        public int Id { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.String)]
+        public string Id { get; set; }
         public int StudentId { get; set; }
         public Student Student { get; set; }
         public int CourseId { get; set; }

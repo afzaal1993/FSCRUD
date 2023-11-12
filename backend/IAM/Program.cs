@@ -1,5 +1,6 @@
 using AspNetCore.Identity.MongoDbCore.Extensions;
 using AspNetCore.Identity.MongoDbCore.Infrastructure;
+using IAM.Helpers;
 using IAM.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -24,42 +25,11 @@ BsonSerializer.RegisterSerializer(new GuidSerializer(MongoDB.Bson.BsonType.Strin
 BsonSerializer.RegisterSerializer(new DateTimeSerializer(MongoDB.Bson.BsonType.String));
 BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(MongoDB.Bson.BsonType.String));
 
-var mongoDbConfig = builder.Configuration.GetSection("MongoDbConfig");
-var dbName = mongoDbConfig["Name"];
-var host = mongoDbConfig["Host"];
-var port = mongoDbConfig.GetValue<int>("Port");
-var username = mongoDbConfig["Username"];
-var password = mongoDbConfig["Password"];
-
-//MongoDb Configuration
-var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
-{
-    MongoDbSettings = new MongoDbSettings
-    {
-        ConnectionString = $"mongodb://{username}:{password}@{host}:{port}",
-        DatabaseName = dbName
-    },
-    IdentityOptionsAction = options =>
-    {
-        options.Password.RequireDigit = true;
-        options.Password.RequireLowercase = true;
-        options.Password.RequireUppercase = true;
-        options.Password.RequiredLength = 8;
-        options.Password.RequireNonAlphanumeric = true;
-
-        //lock
-        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-        options.Lockout.MaxFailedAccessAttempts = 5;
-
-        options.User.RequireUniqueEmail = true;
-    }
-};
-
-builder.Services.ConfigureMongoDbIdentity<ApplicationUser, ApplicationRole, Guid>(mongoDbIdentityConfig)
-    .AddUserManager<UserManager<ApplicationUser>>()
-    .AddSignInManager<SignInManager<ApplicationUser>>()
-    .AddRoleManager<RoleManager<ApplicationRole>>()
-.AddDefaultTokenProviders();
+var mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbConfig)).Get<MongoDbConfig>();
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+    .AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>(
+        mongoDbSettings.ConnectionString, mongoDbSettings.Name
+    );
 
 //Adding Authnetication
 builder.Services.AddAuthentication(options =>

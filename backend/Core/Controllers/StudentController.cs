@@ -83,18 +83,18 @@ namespace core.Controllers
             return Ok(ApiResponse<List<Student>>.Success(result));
         }
 
-        [HttpGet]
-        [Route("GetById")]
-        [ProducesResponseType(typeof(ApiResponse<Student>), 200)]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var result = await _dbContext.Students.FirstOrDefaultAsync(y => y.Id == id);
+        //[HttpGet]
+        //[Route("GetById")]
+        //[ProducesResponseType(typeof(ApiResponse<Student>), 200)]
+        //public async Task<IActionResult> GetById(int id)
+        //{
+        //    var result = await _dbContext.Students.FirstOrDefaultAsync(y => y.Id == id);
 
-            if (result == null)
-                return NotFound(ApiResponse<string>.NotFound());
+        //    if (result == null)
+        //        return NotFound(ApiResponse<string>.NotFound());
 
-            return Ok(ApiResponse<Student>.Success(result));
-        }
+        //    return Ok(ApiResponse<Student>.Success(result));
+        //}
 
         [HttpPost]
         [Route("AddCourseForStudent")]
