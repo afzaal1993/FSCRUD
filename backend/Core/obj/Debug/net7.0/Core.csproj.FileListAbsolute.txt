@@ -144,3 +144,10 @@ D:\FSCRUD\backend\core\obj\Debug\net7.0\refint\core.dll
 D:\FSCRUD\backend\core\obj\Debug\net7.0\core.pdb
 D:\FSCRUD\backend\core\obj\Debug\net7.0\core.genruntimeconfig.cache
 D:\FSCRUD\backend\core\obj\Debug\net7.0\ref\core.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\Consul.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\Dapper.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\DotNetCore.CAP.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\DotNetCore.CAP.Dashboard.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\DotNetCore.CAP.RabbitMQ.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\DotNetCore.CAP.Sqlite.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\RabbitMQ.Client.dll

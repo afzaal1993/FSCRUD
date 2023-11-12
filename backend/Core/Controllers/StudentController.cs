@@ -5,6 +5,7 @@ using Core.Data;
 using Core.DTOs;
 using Core.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -94,5 +95,57 @@ namespace core.Controllers
 
             return Ok(ApiResponse<Student>.Success(result));
         }
+
+        [HttpPost]
+        [Route("AddCourseForStudent")]
+        [ProducesResponseType(typeof(ApiResponse<string>), 200)]
+        public async Task<IActionResult> AddCourseForStudent(AddCourseForStudentDto model)
+        {
+            var studentCourse = _mapper.Map<StudentCourse>(model);
+
+            await _dbContext.StudentCourses.AddAsync(studentCourse);
+
+            var result = await _dbContext.SaveChangesAsync();
+
+            if (result > 0)
+                return Created("", ApiResponse<string>.Success());
+            else
+                return BadRequest(ApiResponse<string>.Error());
+        }
+
+        [HttpGet]
+        [Route("GetAllStudentsCourses")]
+        [ProducesResponseType(typeof(ApiResponse<List<GetStudentCourseDto>>), 200)]
+        public async Task<IActionResult> GetAllStudentsCourses()
+        {
+            var result = await _dbContext.StudentCourses.Include(s => s.Student).Include(c => c.Course).ToListAsync();
+
+            if (result == null)
+                return BadRequest(ApiResponse<string>.Error("Error Occurred"));
+
+            if (result.Count() == 0)
+                return NotFound(ApiResponse<string>.NotFound());
+
+            var dto = _mapper.Map<List<GetStudentCourseDto>>(result);
+
+            return Ok(ApiResponse<List<GetStudentCourseDto>>.Success(dto));
+        }
+
+        [HttpGet]
+        [Route("GetStudentCourseByStudentId")]
+        [ProducesResponseType(typeof(ApiResponse<List<GetStudentCourseDto>>), 200)]
+        public async Task<IActionResult> GetStudentCourseByStudentId(int studentId)
+        {
+            var result = await _dbContext.StudentCourses.Include(s => s.Student).Include(c => c.Course)
+                                                    .FirstOrDefaultAsync(x => x.StudentId == studentId);
+
+            if (result == null)
+                return NotFound(ApiResponse<string>.NotFound());
+
+            var dto = _mapper.Map<GetStudentCourseDto>(result);
+
+            return Ok(ApiResponse<GetStudentCourseDto>.Success(dto));
+        }
+
     }
 }

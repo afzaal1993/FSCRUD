@@ -14,6 +14,19 @@ builder.Services.AddDbContext<CoreDbContext>(options => options.UseSqlite(builde
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+//RabbitMQ CAP Library
+//builder.Services.AddCap(options =>
+//{
+//    options.UseSqlite(builder.Configuration.GetConnectionString("Default"));
+//    options.UseRabbitMQ(rabbitMqoptions =>
+//    {
+//        rabbitMqoptions.HostName = "localhost";
+//        rabbitMqoptions.UserName = "admin";
+//        rabbitMqoptions.Password = "admin123456";
+//    });
+//    options.UseDashboard();
+//});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

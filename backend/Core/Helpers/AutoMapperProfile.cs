@@ -19,6 +19,13 @@ namespace Core.Helpers
                           opt => opt.MapFrom(src => src.Batch.BatchName));
 
             CreateMap<StudentDto, Student>();
+
+            CreateMap<AddCourseForStudentDto, StudentCourse>();
+            CreateMap<StudentCourse, GetStudentCourseDto>()
+                        .ForMember(dest => dest.StudentName,
+                        opt => opt.MapFrom(src => src.Student.FirstName + " " + src.Student.MiddleName + " " + src.Student.LastName))
+                        .ForMember(dest => dest.CourseName,
+                        opt => opt.MapFrom(src => src.Course.CourseName));
         }
     }
 }

@@ -1,0 +1,26 @@
+﻿services:
+  mongodb:  #any name for the service
+    image: mongo
+    environment:
+        - MONGO_INITDB_ROOT_USERNAME=root
+        - MONGO_INITDB_ROOT_PASSWORD=mongopw
+    ports:
+        - 27017:27017 #external:internal port
+    volumes:
+        - myiamdata:/data/db #Creating a named volume my name myiamdata, and inside the container the data in inside data/db folder
+
+        #docker compose up -d, here -d means the container will run in background
+  rabbitmq:
+    image: rabbitmq:3-management #rabbitmq and its : management portal
+    ports:
+    - "5672:5672"
+    - "15672:15672" #for management portal
+    volumes:
+    - rabbitmq_data:/var/lib/rabbitmq
+    environment:
+    - RABBITMQ_DEFAULT_USER=admin
+    - RABBITMQ_DEFAULT_PASS=admin123456
+volumes:
+    myiamdata:
+    rabbitmq_data:
+    
