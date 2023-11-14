@@ -10,7 +10,7 @@ namespace Core.Entities
     public class Student
     {
         [BsonId]
-        [BsonRepresentation(BsonType.String)]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

@@ -141,6 +141,10 @@
               "target": "Package",
               "version": "[2.22.0, )"
             },
+            "MongoDB.Entities": {
+              "target": "Package",
+              "version": "[22.1.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"

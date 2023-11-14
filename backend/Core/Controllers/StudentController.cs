@@ -113,39 +113,39 @@ namespace core.Controllers
                 return BadRequest(ApiResponse<string>.Error());
         }
 
-        [HttpGet]
-        [Route("GetAllStudentsCourses")]
-        [ProducesResponseType(typeof(ApiResponse<List<GetStudentCourseDto>>), 200)]
-        public async Task<IActionResult> GetAllStudentsCourses()
-        {
-            var result = await _dbContext.StudentCourses.Include(s => s.Student).Include(c => c.Course).ToListAsync();
+        //[HttpGet]
+        //[Route("GetAllStudentsCourses")]
+        //[ProducesResponseType(typeof(ApiResponse<List<GetStudentCourseDto>>), 200)]
+        //public async Task<IActionResult> GetAllStudentsCourses()
+        //{
+        //    var result = await _dbContext.StudentCourses.Include(s => s.Student).Include(c => c.Course).ToListAsync();
 
-            if (result == null)
-                return BadRequest(ApiResponse<string>.Error("Error Occurred"));
+        //    if (result == null)
+        //        return BadRequest(ApiResponse<string>.Error("Error Occurred"));
 
-            if (result.Count() == 0)
-                return NotFound(ApiResponse<string>.NotFound());
+        //    if (result.Count() == 0)
+        //        return NotFound(ApiResponse<string>.NotFound());
 
-            var dto = _mapper.Map<List<GetStudentCourseDto>>(result);
+        //    var dto = _mapper.Map<List<GetStudentCourseDto>>(result);
 
-            return Ok(ApiResponse<List<GetStudentCourseDto>>.Success(dto));
-        }
+        //    return Ok(ApiResponse<List<GetStudentCourseDto>>.Success(dto));
+        //}
 
-        [HttpGet]
-        [Route("GetStudentCourseByStudentId")]
-        [ProducesResponseType(typeof(ApiResponse<List<GetStudentCourseDto>>), 200)]
-        public async Task<IActionResult> GetStudentCourseByStudentId(int studentId)
-        {
-            var result = await _dbContext.StudentCourses.Include(s => s.Student).Include(c => c.Course)
-                                                    .FirstOrDefaultAsync(x => x.StudentId == studentId);
+        //[HttpGet]
+        //[Route("GetStudentCourseByStudentId")]
+        //[ProducesResponseType(typeof(ApiResponse<List<GetStudentCourseDto>>), 200)]
+        //public async Task<IActionResult> GetStudentCourseByStudentId(int studentId)
+        //{
+        //    var result = await _dbContext.StudentCourses.Include(s => s.Student).Include(c => c.Course)
+        //                                            .FirstOrDefaultAsync(x => x.StudentId == studentId);
 
-            if (result == null)
-                return NotFound(ApiResponse<string>.NotFound());
+        //    if (result == null)
+        //        return NotFound(ApiResponse<string>.NotFound());
 
-            var dto = _mapper.Map<GetStudentCourseDto>(result);
+        //    var dto = _mapper.Map<GetStudentCourseDto>(result);
 
-            return Ok(ApiResponse<GetStudentCourseDto>.Success(dto));
-        }
+        //    return Ok(ApiResponse<GetStudentCourseDto>.Success(dto));
+        //}
 
     }
 }

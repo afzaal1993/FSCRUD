@@ -10,6 +10,8 @@ using Core.DTOs;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace Core.Controllers
 {
@@ -35,15 +37,6 @@ namespace Core.Controllers
         public async Task<IActionResult> Create(CourseDto model)
         {
             var course = _mapper.Map<Course>(model);
-
-            //await _dbContext.Courses.AddAsync(course);
-
-            //var result = await _dbContext.SaveChangesAsync();
-
-            //if (result > 0)
-            //    return Created("", ApiResponse<string>.Success());
-            //else
-            //    return BadRequest(ApiResponse<string>.Error());
 
             await _mongoDBContext.Courses.InsertOneAsync(course);
             if (course.Id != null)
@@ -75,37 +68,40 @@ namespace Core.Controllers
         //        return BadRequest(ApiResponse<string>.Error());
         //}
 
-        [HttpGet]
-        [Route("GetAll")]
-        [ProducesResponseType(typeof(ApiResponse<List<GetCourseDto>>), 200)]
-        public async Task<IActionResult> GetAll()
-        {
-            var result = await _dbContext.Courses.Include(x => x.Batch).ToListAsync();
-
-            if (result == null)
-                return BadRequest(ApiResponse<string>.Error("Error Occurred"));
-
-            if (result.Count() == 0)
-                return NotFound(ApiResponse<string>.NotFound());
-
-            var dto = _mapper.Map<List<GetCourseDto>>(result);
-
-            return Ok(ApiResponse<List<GetCourseDto>>.Success(dto));
-        }
-
         //[HttpGet]
-        //[Route("GetById")]
-        //[ProducesResponseType(typeof(ApiResponse<GetCourseDto>), 200)]
-        //public async Task<IActionResult> GetById(int id)
+        //[Route("GetAll")]
+        //[ProducesResponseType(typeof(ApiResponse<List<GetCourseDto>>), 200)]
+        //public async Task<IActionResult> GetAll()
         //{
-        //    var result = await _dbContext.Courses.Include(x => x.Batch).FirstOrDefaultAsync(y => y.Id == id);
+        //    var result = await _dbContext.Courses.Include(x => x.Batch).ToListAsync();
 
         //    if (result == null)
+        //        return BadRequest(ApiResponse<string>.Error("Error Occurred"));
+
+        //    if (result.Count() == 0)
         //        return NotFound(ApiResponse<string>.NotFound());
 
-        //    var dto = _mapper.Map<GetCourseDto>(result);
+        //    var dto = _mapper.Map<List<GetCourseDto>>(result);
 
-        //    return Ok(ApiResponse<GetCourseDto>.Success(dto));
+        //    return Ok(ApiResponse<List<GetCourseDto>>.Success(dto));
         //}
+
+        [HttpGet]
+        [Route("GetById")]
+        [ProducesResponseType(typeof(ApiResponse<GetCourseDto>), 200)]
+        public async Task<IActionResult> GetById(string id)
+        {
+            var result = await _mongoDBContext.Courses.Aggregate()
+                                .Match(c => c.Id == ObjectId.Parse(id))
+                                .Lookup("Batches", "BatchId", "_id", "Batch")
+                                .FirstOrDefaultAsync();
+
+            if (result == null)
+                return NotFound(ApiResponse<string>.NotFound());
+
+            var dto = _mapper.Map<GetCourseDto>(result);
+
+            return Ok(ApiResponse<GetCourseDto>.Success(dto));
+        }
     }
 }

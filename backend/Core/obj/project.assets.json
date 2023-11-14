@@ -703,6 +703,23 @@
           }
         }
       },
+      "MongoDB.Entities/22.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "MongoDB.Driver": "2.21.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/MongoDB.Entities.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/MongoDB.Entities.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "MongoDB.Libmongocrypt/1.8.0": {
         "type": "package",
         "compile": {
@@ -2331,6 +2348,21 @@
         "packageIcon.png"
       ]
     },
+    "MongoDB.Entities/22.1.0": {
+      "sha512": "N1kq1gDmQOft5CJpbq8OAWmYFVBS9JXTiE54VrQpZqSvFtSRoMbkJ6jd9pXlxSERvBl4maFguSxFtqH9nEdDnQ==",
+      "type": "package",
+      "path": "mongodb.entities/22.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/netstandard2.1/MongoDB.Entities.dll",
+        "lib/netstandard2.1/MongoDB.Entities.xml",
+        "mongodb.entities.22.1.0.nupkg.sha512",
+        "mongodb.entities.nuspec"
+      ]
+    },
     "MongoDB.Libmongocrypt/1.8.0": {
       "sha512": "fgNw8Dxpkq7mpoaAYes8cfnPRzvFIoB8oL9GPXwi3op/rONftl0WAeg4akRLcxfoVuUvuUO2wGoVBr3JzJ7Svw==",
       "type": "package",
@@ -2998,6 +3030,7 @@
       "Microsoft.EntityFrameworkCore.Design >= 7.0.0",
       "Microsoft.EntityFrameworkCore.Sqlite >= 7.0.0",
       "MongoDB.Driver >= 2.22.0",
+      "MongoDB.Entities >= 22.1.0",
       "Newtonsoft.Json >= 13.0.3",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
@@ -3086,6 +3119,10 @@
           "MongoDB.Driver": {
             "target": "Package",
             "version": "[2.22.0, )"
+          },
+          "MongoDB.Entities": {
+            "target": "Package",
+            "version": "[22.1.0, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",

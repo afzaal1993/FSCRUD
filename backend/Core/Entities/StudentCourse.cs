@@ -10,12 +10,10 @@ namespace Core.Entities
     public class StudentCourse
     {
         [BsonId]
-        [BsonRepresentation(BsonType.String)]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        public int StudentId { get; set; }
-        public Student Student { get; set; }
-        public int CourseId { get; set; }
-        public Course Course { get; set; }
+        public string StudentId { get; set; }
+        public string CourseId { get; set; }
         public DateTime EnrollDate { get; set; }
         public DateTime CourseStartDate { get; set; }
         public DateTime CourseEndDate { get; set; }
