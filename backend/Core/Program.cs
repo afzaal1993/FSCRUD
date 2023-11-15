@@ -6,6 +6,8 @@ using MongoDB.Driver;
 using core.Data;
 using static Dapper.SqlMapper;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Bson.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 

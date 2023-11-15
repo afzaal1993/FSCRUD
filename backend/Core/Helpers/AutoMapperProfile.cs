@@ -14,9 +14,9 @@ namespace Core.Helpers
         public AutoMapperProfile()
         {
             CreateMap<CourseDto, Course>();
-            //CreateMap<Course, GetCourseDto>()
-            //            .ForMember(dest => dest.BatchName,
-            //              opt => opt.MapFrom(src => src.Batch.BatchName));
+            CreateMap<Course, GetCourseDto>()
+                        .ForMember(dest => dest.BatchName,
+                          opt => opt.MapFrom(src => src.Batch.BatchName));
 
             CreateMap<StudentDto, Student>();
 

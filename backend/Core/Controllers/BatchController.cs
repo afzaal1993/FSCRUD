@@ -11,7 +11,9 @@ using Core.DTOs;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Entities;
 
 namespace Core.Controllers
 {
@@ -38,10 +40,28 @@ namespace Core.Controllers
             var batch = _mapper.Map<Batch>(model);
 
             await _mongoDBContext.Batches.InsertOneAsync(batch);
-            if (batch.Id != null)
-                return Created("", ApiResponse<string>.Success());
-            else
-                return BadRequest(ApiResponse<string>.Error());
+
+            return Created("", ApiResponse<string>.Success());
+        }
+
+        [HttpPut]
+        [Route("Update")]
+        [ProducesResponseType(typeof(ApiResponse<string>), 200)]
+        public async Task<IActionResult> Update(string id, BatchDto model)
+        {
+            var result = await _mongoDBContext.Batches.Find(b => b.Id == ObjectId.Parse(id)).FirstOrDefaultAsync();
+
+            if (result == null)
+            {
+                return NotFound(ApiResponse<string>.NotFound());
+            }
+
+            var batch = _mapper.Map<Batch>(model);
+            batch.Id = ObjectId.Parse(id);
+
+            await _mongoDBContext.Batches.ReplaceOneAsync(p => p.Id == ObjectId.Parse(id), batch);
+
+            return Ok(ApiResponse<GetBatchDto>.Success());
         }
 
         [HttpGet]
@@ -60,6 +80,35 @@ namespace Core.Controllers
             var dto = _mapper.Map<List<GetBatchDto>>(result);
 
             return Ok(ApiResponse<List<GetBatchDto>>.Success(dto));
+        }
+
+        [HttpGet]
+        [Route("GetById")]
+        [ProducesResponseType(typeof(ApiResponse<GetBatchDto>), 200)]
+        public async Task<IActionResult> GetAll(string id)
+        {
+            var result = await _mongoDBContext.Batches.Find(b => b.Id == ObjectId.Parse(id)).FirstOrDefaultAsync();
+
+            if (result == null)
+                return NotFound(ApiResponse<string>.NotFound());
+
+            var dto = _mapper.Map<GetBatchDto>(result);
+
+            return Ok(ApiResponse<GetBatchDto>.Success(dto));
+        }
+
+        [HttpDelete]
+        [Route("Delete")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var result = await _mongoDBContext.Batches.Find(b => b.Id == ObjectId.Parse(id)).FirstOrDefaultAsync();
+
+            if (result == null)
+                return NotFound(ApiResponse<string>.NotFound());
+
+            await _mongoDBContext.Batches.DeleteOneAsync(b => b.Id == ObjectId.Parse(id));
+
+            return Ok(ApiResponse<GetBatchDto>.Success());
         }
     }
 }

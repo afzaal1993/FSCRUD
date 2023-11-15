@@ -6,17 +6,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
+using core.Entities;
 
 namespace Core.Entities
 {
-    public class Course
+    public class Course : BaseEntity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId Id { get; set; }
         public ObjectId BatchId { get; set; }
         public string CourseName { get; set; }
         public decimal CourseFee { get; set; }
         public bool IsActive { get; set; }
+
+        [BsonIgnoreIfNull]
+        public Batch Batch { get; set; } = null;
     }
 }

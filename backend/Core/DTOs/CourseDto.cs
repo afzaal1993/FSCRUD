@@ -15,7 +15,7 @@ namespace Core.DTOs
 
     public class GetCourseDto
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string CourseName { get; set; }
         public string BatchName { get; set; }
         public decimal CourseFee { get; set; }

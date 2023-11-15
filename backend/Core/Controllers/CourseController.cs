@@ -11,7 +11,9 @@ using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using Newtonsoft.Json;
 
 namespace Core.Controllers
 {
@@ -39,10 +41,8 @@ namespace Core.Controllers
             var course = _mapper.Map<Course>(model);
 
             await _mongoDBContext.Courses.InsertOneAsync(course);
-            if (course.Id != null)
-                return Created("", ApiResponse<string>.Success());
-            else
-                return BadRequest(ApiResponse<string>.Error());
+
+            return Created("", ApiResponse<string>.Success());
         }
 
         //[HttpPut]
@@ -68,23 +68,28 @@ namespace Core.Controllers
         //        return BadRequest(ApiResponse<string>.Error());
         //}
 
-        //[HttpGet]
-        //[Route("GetAll")]
-        //[ProducesResponseType(typeof(ApiResponse<List<GetCourseDto>>), 200)]
-        //public async Task<IActionResult> GetAll()
-        //{
-        //    var result = await _dbContext.Courses.Include(x => x.Batch).ToListAsync();
+        [HttpGet]
+        [Route("GetAll")]
+        [ProducesResponseType(typeof(ApiResponse<List<GetCourseDto>>), 200)]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _mongoDBContext.Courses.Aggregate()
+                               .Lookup("Batches", "BatchId", "_id", "Batch")
+                               .Unwind("Batch")
+                               .ToListAsync();
 
-        //    if (result == null)
-        //        return BadRequest(ApiResponse<string>.Error("Error Occurred"));
+            if (result == null)
+                return BadRequest(ApiResponse<string>.Error("Error Occurred"));
 
-        //    if (result.Count() == 0)
-        //        return NotFound(ApiResponse<string>.NotFound());
+            if (result.Count() == 0)
+                return NotFound(ApiResponse<string>.NotFound());
 
-        //    var dto = _mapper.Map<List<GetCourseDto>>(result);
+            var list = result.Select(bsonDoc => BsonSerializer.Deserialize<Course>(bsonDoc)).ToList();
 
-        //    return Ok(ApiResponse<List<GetCourseDto>>.Success(dto));
-        //}
+            var dto = _mapper.Map<List<GetCourseDto>>(list);
+
+            return Ok(ApiResponse<List<GetCourseDto>>.Success(dto));
+        }
 
         [HttpGet]
         [Route("GetById")]
@@ -94,12 +99,15 @@ namespace Core.Controllers
             var result = await _mongoDBContext.Courses.Aggregate()
                                 .Match(c => c.Id == ObjectId.Parse(id))
                                 .Lookup("Batches", "BatchId", "_id", "Batch")
+                                .Unwind("Batch")
                                 .FirstOrDefaultAsync();
 
             if (result == null)
                 return NotFound(ApiResponse<string>.NotFound());
 
-            var dto = _mapper.Map<GetCourseDto>(result);
+            Course course = BsonSerializer.Deserialize<Course>(result);
+
+            var dto = _mapper.Map<GetCourseDto>(course);
 
             return Ok(ApiResponse<GetCourseDto>.Success(dto));
         }
