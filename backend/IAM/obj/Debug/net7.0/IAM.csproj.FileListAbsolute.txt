@@ -119,3 +119,10 @@ D:\Test\FSCRUD\backend\IAM\obj\Debug\net7.0\refint\IAM.dll
 D:\Test\FSCRUD\backend\IAM\obj\Debug\net7.0\IAM.pdb
 D:\Test\FSCRUD\backend\IAM\obj\Debug\net7.0\IAM.genruntimeconfig.cache
 D:\Test\FSCRUD\backend\IAM\obj\Debug\net7.0\ref\IAM.dll
+D:\FSCRUD\backend\IAM\bin\Debug\net7.0\Consul.dll
+D:\FSCRUD\backend\IAM\bin\Debug\net7.0\DotNetCore.CAP.dll
+D:\FSCRUD\backend\IAM\bin\Debug\net7.0\DotNetCore.CAP.Dashboard.dll
+D:\FSCRUD\backend\IAM\bin\Debug\net7.0\DotNetCore.CAP.MongoDB.dll
+D:\FSCRUD\backend\IAM\bin\Debug\net7.0\DotNetCore.CAP.RabbitMQ.dll
+D:\FSCRUD\backend\IAM\bin\Debug\net7.0\Newtonsoft.Json.dll
+D:\FSCRUD\backend\IAM\bin\Debug\net7.0\RabbitMQ.Client.dll

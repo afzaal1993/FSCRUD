@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Amazon.Runtime.Internal;
 using AutoMapper;
 using Common;
 using core.Data;
@@ -40,33 +41,37 @@ namespace Core.Controllers
         {
             var course = _mapper.Map<Course>(model);
 
+            course.CreatedDate = DateTime.Now.ToString();
+
             await _mongoDBContext.Courses.InsertOneAsync(course);
 
             return Created("", ApiResponse<string>.Success());
         }
 
-        //[HttpPut]
-        //[Route("Update")]
-        //[ProducesResponseType(typeof(ApiResponse<string>), 200)]
-        //public async Task<IActionResult> Update(int id, CourseDto model)
-        //{
-        //    var existingCourse = await _dbContext.Courses.FindAsync(id);
+        [HttpPut]
+        [Route("Update")]
+        [ProducesResponseType(typeof(ApiResponse<string>), 200)]
+        public async Task<IActionResult> Update(string id, UpdateCourseDto model)
+        {
+            var documentId = new ObjectId(id);
 
-        //    if (existingCourse == null)
-        //        return NotFound(ApiResponse<string>.NotFound());
+            var filter = Builders<Course>.Filter.Eq("_id", documentId);
 
-        //    existingCourse.BatchId = model.BatchId;
-        //    existingCourse.CourseFee = model.CourseFee;
-        //    existingCourse.CourseName = model.CourseName;
-        //    existingCourse.IsActive = model.IsActive;
+            var update = Builders<Course>.Update
+                            .Set(x => x.ModifiedBy, model.ModifiedBy)
+                            .Set(x => x.ModifiedDate, DateTime.Now.ToString())
+                            .Set(x => x.BatchId, ObjectId.Parse(model.BatchId))
+                            .Set(x => x.IsActive, model.IsActive)
+                            .Set(x => x.CourseFee, model.CourseFee)
+                            .Set(x => x.CourseName, model.CourseName);
 
-        //    var result = await _dbContext.SaveChangesAsync();
+            var updateResult = await _mongoDBContext.Courses.UpdateOneAsync(filter, update);
 
-        //    if (result > 0)
-        //        return Ok(ApiResponse<string>.Success());
-        //    else
-        //        return BadRequest(ApiResponse<string>.Error());
-        //}
+            if (updateResult.ModifiedCount > 0)
+                return Ok(ApiResponse<string>.Success());
+            else
+                return BadRequest(ApiResponse<string>.Error());
+        }
 
         [HttpGet]
         [Route("GetAll")]

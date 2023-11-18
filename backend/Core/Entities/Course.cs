@@ -16,6 +16,10 @@ namespace Core.Entities
         public string CourseName { get; set; }
         public decimal CourseFee { get; set; }
         public bool IsActive { get; set; }
+        public string CreatedBy { get; set; }
+        public string CreatedDate { get; set; }
+        public string ModifiedBy { get; set; }
+        public string ModifiedDate { get; set; }
 
         [BsonIgnoreIfNull]
         public Batch Batch { get; set; } = null;

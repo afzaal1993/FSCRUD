@@ -172,3 +172,17 @@ D:\Test\FSCRUD\backend\core\bin\Debug\net7.0\runtimes\linux\native\libmongocrypt
 D:\Test\FSCRUD\backend\core\bin\Debug\net7.0\runtimes\osx\native\libmongocrypt.dylib
 D:\Test\FSCRUD\backend\core\bin\Debug\net7.0\runtimes\win\native\mongocrypt.dll
 D:\Test\FSCRUD\backend\core\bin\Debug\net7.0\MongoDB.Entities.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\AWSSDK.Core.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\AWSSDK.SecurityToken.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\DnsClient.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\MongoDB.Bson.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\MongoDB.Driver.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\MongoDB.Driver.Core.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\MongoDB.Entities.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\MongoDB.Libmongocrypt.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\SharpCompress.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\Snappier.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\ZstdSharp.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\runtimes\linux\native\libmongocrypt.so
+D:\FSCRUD\backend\core\bin\Debug\net7.0\runtimes\osx\native\libmongocrypt.dylib
+D:\FSCRUD\backend\core\bin\Debug\net7.0\runtimes\win\native\mongocrypt.dll

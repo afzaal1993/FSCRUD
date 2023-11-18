@@ -11,6 +11,16 @@ namespace Core.DTOs
         public string CourseName { get; set; }
         public decimal CourseFee { get; set; }
         public bool IsActive { get; set; }
+        public string CreatedBy { get; set; }
+    }
+
+    public class UpdateCourseDto
+    {
+        public string BatchId { get; set; }
+        public string CourseName { get; set; }
+        public decimal CourseFee { get; set; }
+        public bool IsActive { get; set; }
+        public string ModifiedBy { get; set; }
     }
 
     public class GetCourseDto
@@ -20,5 +30,9 @@ namespace Core.DTOs
         public string BatchName { get; set; }
         public decimal CourseFee { get; set; }
         public bool IsActive { get; set; }
+        public string CreatedBy { get; set; }
+        public string CreatedDate { get; set; }
+        public string ModifiedBy { get; set; }
+        public string ModifiedDate { get; set; }
     }
 }

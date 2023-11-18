@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Common;
+using core.Data;
 using core.DTOs;
 using Core.Data;
 using Core.DTOs;
@@ -8,6 +9,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
 
 namespace core.Controllers
 {
@@ -16,52 +20,56 @@ namespace core.Controllers
     public class StudentController : ControllerBase
     {
         private readonly CoreDbContext _dbContext;
+        private readonly MongoDBContext _mongoDBContext;
         private readonly IMapper _mapper;
-        public StudentController(CoreDbContext coreDbContext, IMapper mapper)
+        public StudentController(MongoDBContext mongoDBContext, IMapper mapper)
         {
+            _mongoDBContext = mongoDBContext;
             _mapper = mapper;
-            _dbContext = coreDbContext;
         }
 
 
         [HttpPost]
         [Route("Create")]
         [ProducesResponseType(typeof(ApiResponse<string>), 201)]
-        public async Task<IActionResult> Create(StudentDto model)
+        public async Task<IActionResult> Create([FromForm] StudentDto model)
         {
+            string fileName = Guid.NewGuid().ToString();
+
             var student = _mapper.Map<Student>(model);
 
-            await _dbContext.Students.AddAsync(student);
+            student.CreatedDate = Helper.GetDateAndTime();
+            student.FileName = fileName;
 
-            var result = await _dbContext.SaveChangesAsync();
+            await _mongoDBContext.Students.InsertOneAsync(student);
 
-            if (result > 0)
-                return Created("", ApiResponse<string>.Success());
-            else
-                return BadRequest(ApiResponse<string>.Error());
+            return Created("", ApiResponse<string>.Success());
         }
 
         [HttpPut]
         [Route("Update")]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
-        public async Task<IActionResult> Update(int id, StudentDto model)
+        public async Task<IActionResult> Update(string id, [FromForm] UpdateStudentDto model)
         {
-            var existingStudent = await _dbContext.Students.FindAsync(id);
+            var documentId = new ObjectId(id);
 
-            if (existingStudent == null)
-                return NotFound(ApiResponse<string>.NotFound());
+            var filter = Builders<Student>.Filter.Eq("_id", documentId);
 
-            existingStudent.FirstName = model.FirstName;
-            existingStudent.MiddleName = model.MiddleName;
-            existingStudent.LastName = model.LastName;
-            existingStudent.DateOfBirth = model.DateOfBirth;
-            existingStudent.Address = model.Address;
-            existingStudent.MobileNo = model.MobileNo;
-            existingStudent.PhotoUrl = model.PhotoUrl;
+            var update = Builders<Student>.Update
+                            .Set(x => x.ModifiedBy, model.ModifiedBy)
+                            .Set(x => x.ModifiedDate, Helper.GetDateAndTime())
+                            .Set(x => x.FirstName, model.FirstName)
+                            .Set(x => x.MiddleName, model.MiddleName)
+                            .Set(x => x.LastName, model.LastName)
+                            .Set(x => x.Address, model.Address)
+                            .Set(x => x.MobileNo, model.MobileNo)
+                            .Set(x => x.IsActive, model.IsActive)
+                            .Set(x => x.DateOfBirth, model.DateOfBirth);
 
-            var result = await _dbContext.SaveChangesAsync();
 
-            if (result > 0)
+            var updateResult = await _mongoDBContext.Students.UpdateOneAsync(filter, update);
+
+            if (updateResult.ModifiedCount > 0)
                 return Ok(ApiResponse<string>.Success());
             else
                 return BadRequest(ApiResponse<string>.Error());
@@ -69,10 +77,10 @@ namespace core.Controllers
 
         [HttpGet]
         [Route("GetAll")]
-        [ProducesResponseType(typeof(ApiResponse<List<Student>>), 200)]
+        [ProducesResponseType(typeof(ApiResponse<List<GetStudentDto>>), 200)]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _dbContext.Students.ToListAsync();
+            var result = await _mongoDBContext.Students.Find(_ => true).ToListAsync();
 
             if (result == null)
                 return BadRequest(ApiResponse<string>.Error("Error Occurred"));
@@ -80,21 +88,25 @@ namespace core.Controllers
             if (result.Count() == 0)
                 return NotFound(ApiResponse<string>.NotFound());
 
-            return Ok(ApiResponse<List<Student>>.Success(result));
+            var dto = _mapper.Map<List<GetStudentDto>>(result);
+
+            return Ok(ApiResponse<List<GetStudentDto>>.Success(dto));
         }
 
-        //[HttpGet]
-        //[Route("GetById")]
-        //[ProducesResponseType(typeof(ApiResponse<Student>), 200)]
-        //public async Task<IActionResult> GetById(int id)
-        //{
-        //    var result = await _dbContext.Students.FirstOrDefaultAsync(y => y.Id == id);
+        [HttpGet]
+        [Route("GetById")]
+        [ProducesResponseType(typeof(ApiResponse<GetStudentDto>), 200)]
+        public async Task<IActionResult> GetById(string id)
+        {
+            var result = await _mongoDBContext.Students.Find(s => s.Id == ObjectId.Parse(id)).FirstOrDefaultAsync();
 
-        //    if (result == null)
-        //        return NotFound(ApiResponse<string>.NotFound());
+            if (result == null)
+                return NotFound(ApiResponse<string>.NotFound());
 
-        //    return Ok(ApiResponse<Student>.Success(result));
-        //}
+            var dto = _mapper.Map<GetStudentDto>(result);
+
+            return Ok(ApiResponse<GetStudentDto>.Success(dto));
+        }
 
         [HttpPost]
         [Route("AddCourseForStudent")]
@@ -103,49 +115,33 @@ namespace core.Controllers
         {
             var studentCourse = _mapper.Map<StudentCourse>(model);
 
-            await _dbContext.StudentCourses.AddAsync(studentCourse);
+            await _mongoDBContext.StudentCourses.InsertOneAsync(studentCourse);
 
-            var result = await _dbContext.SaveChangesAsync();
-
-            if (result > 0)
-                return Created("", ApiResponse<string>.Success());
-            else
-                return BadRequest(ApiResponse<string>.Error());
+            return Created("", ApiResponse<string>.Success());
         }
 
-        //[HttpGet]
-        //[Route("GetAllStudentsCourses")]
-        //[ProducesResponseType(typeof(ApiResponse<List<GetStudentCourseDto>>), 200)]
-        //public async Task<IActionResult> GetAllStudentsCourses()
-        //{
-        //    var result = await _dbContext.StudentCourses.Include(s => s.Student).Include(c => c.Course).ToListAsync();
+        [HttpGet]
+        [Route("GetStudentCourseByStudentId")]
+        [ProducesResponseType(typeof(ApiResponse<List<GetStudentCourseDto>>), 200)]
+        public async Task<IActionResult> GetStudentCourseByStudentId(string studentId)
+        {
+            var result = await _mongoDBContext.StudentCourses.Aggregate()
+                                .Match(s => s.StudentId == ObjectId.Parse(studentId))
+                                .Lookup("Students", "StudentId", "_id", "Student")
+                                .Unwind("Student")
+                                .Lookup("Courses", "CourseId", "_id", "Course")
+                                .Unwind("Course")
+                                .FirstOrDefaultAsync();
 
-        //    if (result == null)
-        //        return BadRequest(ApiResponse<string>.Error("Error Occurred"));
+            if (result == null)
+                return NotFound(ApiResponse<string>.NotFound());
 
-        //    if (result.Count() == 0)
-        //        return NotFound(ApiResponse<string>.NotFound());
+            StudentCourse studentCourse = BsonSerializer.Deserialize<StudentCourse>(result);
 
-        //    var dto = _mapper.Map<List<GetStudentCourseDto>>(result);
+            var dto = _mapper.Map<GetStudentCourseDto>(studentCourse);
 
-        //    return Ok(ApiResponse<List<GetStudentCourseDto>>.Success(dto));
-        //}
-
-        //[HttpGet]
-        //[Route("GetStudentCourseByStudentId")]
-        //[ProducesResponseType(typeof(ApiResponse<List<GetStudentCourseDto>>), 200)]
-        //public async Task<IActionResult> GetStudentCourseByStudentId(int studentId)
-        //{
-        //    var result = await _dbContext.StudentCourses.Include(s => s.Student).Include(c => c.Course)
-        //                                            .FirstOrDefaultAsync(x => x.StudentId == studentId);
-
-        //    if (result == null)
-        //        return NotFound(ApiResponse<string>.NotFound());
-
-        //    var dto = _mapper.Map<GetStudentCourseDto>(result);
-
-        //    return Ok(ApiResponse<GetStudentCourseDto>.Success(dto));
-        //}
+            return Ok(ApiResponse<GetStudentCourseDto>.Success(dto));
+        }
 
     }
 }

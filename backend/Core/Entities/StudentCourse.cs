@@ -4,18 +4,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using core.Entities;
 
 namespace Core.Entities
 {
-    public class StudentCourse
+    public class StudentCourse : BaseEntity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-        public string StudentId { get; set; }
-        public string CourseId { get; set; }
-        public DateTime EnrollDate { get; set; }
-        public DateTime CourseStartDate { get; set; }
-        public DateTime CourseEndDate { get; set; }
+        public ObjectId StudentId { get; set; }
+        public ObjectId CourseId { get; set; }
+        public string EnrollDate { get; set; }
+        public string CourseStartDate { get; set; }
+        public string CourseEndDate { get; set; }
+
+        [BsonIgnoreIfNull]
+        public Student Student { get; set; } = null;
+
+        [BsonIgnoreIfNull]
+        public Course Course { get; set; } = null;
     }
 }
