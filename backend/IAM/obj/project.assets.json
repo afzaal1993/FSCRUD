@@ -2652,23 +2652,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\afzaal\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\mafaroq\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FSCRUD\\backend\\IAM\\IAM.csproj",
+      "projectUniqueName": "D:\\Test\\FSCRUD\\backend\\IAM\\IAM.csproj",
       "projectName": "IAM",
-      "projectPath": "D:\\FSCRUD\\backend\\IAM\\IAM.csproj",
-      "packagesPath": "C:\\Users\\afzaal\\.nuget\\packages\\",
-      "outputPath": "D:\\FSCRUD\\backend\\IAM\\obj\\",
+      "projectPath": "D:\\Test\\FSCRUD\\backend\\IAM\\IAM.csproj",
+      "packagesPath": "C:\\Users\\mafaroq\\.nuget\\packages\\",
+      "outputPath": "D:\\Test\\FSCRUD\\backend\\IAM\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\afzaal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mafaroq\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2682,8 +2678,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\FSCRUD\\backend\\Common\\Common.csproj": {
-              "projectPath": "D:\\FSCRUD\\backend\\Common\\Common.csproj"
+            "D:\\Test\\FSCRUD\\backend\\Common\\Common.csproj": {
+              "projectPath": "D:\\Test\\FSCRUD\\backend\\Common\\Common.csproj"
             }
           }
         }
@@ -2758,7 +2754,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

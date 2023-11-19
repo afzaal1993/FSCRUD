@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FSCRUD\\backend\\Events\\Events.csproj": {}
+    "D:\\Test\\FSCRUD\\backend\\Events\\Events.csproj": {}
   },
   "projects": {
-    "D:\\FSCRUD\\backend\\Events\\Events.csproj": {
+    "D:\\Test\\FSCRUD\\backend\\Events\\Events.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FSCRUD\\backend\\Events\\Events.csproj",
+        "projectUniqueName": "D:\\Test\\FSCRUD\\backend\\Events\\Events.csproj",
         "projectName": "Events",
-        "projectPath": "D:\\FSCRUD\\backend\\Events\\Events.csproj",
-        "packagesPath": "C:\\Users\\afzaal\\.nuget\\packages\\",
-        "outputPath": "D:\\FSCRUD\\backend\\Events\\obj\\",
+        "projectPath": "D:\\Test\\FSCRUD\\backend\\Events\\Events.csproj",
+        "packagesPath": "C:\\Users\\mafaroq\\.nuget\\packages\\",
+        "outputPath": "D:\\Test\\FSCRUD\\backend\\Events\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\afzaal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mafaroq\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -71,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

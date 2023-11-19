@@ -50,7 +50,14 @@ namespace core.Controllers
 
             if(model.formFile != null)
             {
-                await _capPublisher.PublishAsync("Events.AddStudentImage", model);
+                SaveStudentImage obj = new SaveStudentImage();
+
+                using var memoryStream = new MemoryStream();
+                await model.formFile.CopyToAsync(memoryStream);
+                obj.ImageData = memoryStream.ToArray();
+                obj.FileName = fileName;
+
+                await _capPublisher.PublishAsync("Events.AddStudentImage", obj);
             }
 
             return Created("", ApiResponse<string>.Success());
@@ -90,8 +97,6 @@ namespace core.Controllers
         [ProducesResponseType(typeof(ApiResponse<List<GetStudentDto>>), 200)]
         public async Task<IActionResult> GetAll()
         {
-            await _capPublisher.PublishAsync("Events.Test", "Hello World");
-
             var result = await _mongoDBContext.Students.Find(_ => true).ToListAsync();
 
             if (result == null)
