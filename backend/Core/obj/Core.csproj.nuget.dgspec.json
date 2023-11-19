@@ -117,6 +117,10 @@
               "target": "Package",
               "version": "[7.0.0, )"
             },
+            "DotNetCore.CAP.MongoDB": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "DotNetCore.CAP.RabbitMQ": {
               "target": "Package",
               "version": "[7.0.0, )"

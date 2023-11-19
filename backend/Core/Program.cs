@@ -29,17 +29,21 @@ builder.Services.AddSingleton<MongoDBContext>(serviceProvider =>
 });
 
 //RabbitMQ CAP Library
-//builder.Services.AddCap(options =>
-//{
-//    options.UseSqlite(builder.Configuration.GetConnectionString("Default"));
-//    options.UseRabbitMQ(rabbitMqoptions =>
-//    {
-//        rabbitMqoptions.HostName = "localhost";
-//        rabbitMqoptions.UserName = "admin";
-//        rabbitMqoptions.Password = "admin123456";
-//    });
-//    options.UseDashboard();
-//});
+builder.Services.AddCap(options =>
+{
+    options.UseMongoDB(options =>
+    {
+        options.DatabaseConnection = mongoDbSettings.ConnectionString;
+        options.DatabaseName = mongoDbSettings.Name;
+    });
+    options.UseRabbitMQ(rabbitMqoptions =>
+    {
+        rabbitMqoptions.HostName = "localhost";
+        rabbitMqoptions.UserName = "admin";
+        rabbitMqoptions.Password = "admin123456";
+    });
+    options.UseDashboard();
+});
 
 var app = builder.Build();
 
@@ -50,7 +54,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

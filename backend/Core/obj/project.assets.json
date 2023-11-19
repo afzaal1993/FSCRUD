@@ -140,6 +140,24 @@
           "Microsoft.AspNetCore.App"
         ]
       },
+      "DotNetCore.CAP.MongoDB/7.0.0": {
+        "type": "package",
+        "dependencies": {
+          "DotNetCore.CAP": "7.0.0",
+          "MongoDB.Bson": "2.18.0",
+          "MongoDB.Driver": "2.18.0"
+        },
+        "compile": {
+          "lib/net6.0/DotNetCore.CAP.MongoDB.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/DotNetCore.CAP.MongoDB.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
       "DotNetCore.CAP.RabbitMQ/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -1346,6 +1364,20 @@
         "dotnetcore.cap.dashboard.nuspec",
         "lib/net6.0/DotNetCore.CAP.Dashboard.dll",
         "lib/net6.0/DotNetCore.CAP.Dashboard.pdb",
+        "logo.png"
+      ]
+    },
+    "DotNetCore.CAP.MongoDB/7.0.0": {
+      "sha512": "mpkAZVmA3gtZe1Aw+hNHJAKA0pzyIbkld8FjKkPWvvwHK8T6eeoq+WPzOkzvhaagzjGSYUIz3CKJRK9wCwQ0YQ==",
+      "type": "package",
+      "path": "dotnetcore.cap.mongodb/7.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dotnetcore.cap.mongodb.7.0.0.nupkg.sha512",
+        "dotnetcore.cap.mongodb.nuspec",
+        "lib/net6.0/DotNetCore.CAP.MongoDB.dll",
+        "lib/net6.0/DotNetCore.CAP.MongoDB.pdb",
         "logo.png"
       ]
     },
@@ -3023,6 +3055,7 @@
       "Common >= 1.0.0",
       "DotNetCore.CAP >= 7.0.0",
       "DotNetCore.CAP.Dashboard >= 7.0.0",
+      "DotNetCore.CAP.MongoDB >= 7.0.0",
       "DotNetCore.CAP.RabbitMQ >= 7.0.0",
       "DotNetCore.CAP.Sqlite >= 7.0.0",
       "Microsoft.AspNetCore.OpenApi >= 7.0.0",
@@ -3091,6 +3124,10 @@
             "version": "[7.0.0, )"
           },
           "DotNetCore.CAP.Dashboard": {
+            "target": "Package",
+            "version": "[7.0.0, )"
+          },
+          "DotNetCore.CAP.MongoDB": {
             "target": "Package",
             "version": "[7.0.0, )"
           },

@@ -5,6 +5,7 @@ using core.DTOs;
 using Core.Data;
 using Core.DTOs;
 using Core.Entities;
+using DotNetCore.CAP;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -22,10 +23,14 @@ namespace core.Controllers
         private readonly CoreDbContext _dbContext;
         private readonly MongoDBContext _mongoDBContext;
         private readonly IMapper _mapper;
-        public StudentController(MongoDBContext mongoDBContext, IMapper mapper)
+        private readonly ICapPublisher _capPublisher;
+
+        public StudentController(MongoDBContext mongoDBContext, IMapper mapper,
+                                    ICapPublisher capPublisher)
         {
             _mongoDBContext = mongoDBContext;
             _mapper = mapper;
+            _capPublisher = capPublisher;
         }
 
 
@@ -42,6 +47,11 @@ namespace core.Controllers
             student.FileName = fileName;
 
             await _mongoDBContext.Students.InsertOneAsync(student);
+
+            if(model.formFile != null)
+            {
+                await _capPublisher.PublishAsync("Events.AddStudentImage", model);
+            }
 
             return Created("", ApiResponse<string>.Success());
         }
@@ -80,6 +90,8 @@ namespace core.Controllers
         [ProducesResponseType(typeof(ApiResponse<List<GetStudentDto>>), 200)]
         public async Task<IActionResult> GetAll()
         {
+            await _capPublisher.PublishAsync("Events.Test", "Hello World");
+
             var result = await _mongoDBContext.Students.Find(_ => true).ToListAsync();
 
             if (result == null)

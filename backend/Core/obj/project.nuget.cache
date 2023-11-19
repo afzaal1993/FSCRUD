@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/rInFLFOMcyTVeF6B+eX5vdsjiUDzIoDFsuND1ILXKOqw9tp9CDsjhiF1vxba8+oTwqQQavJaiOmjaGxwiF+/g==",
+  "dgSpecHash": "bZTvFMUFbd2Y5MdN8a7Rg9JhrYwcBxlnTwQlwdAaiMxIyE4YYqJFLzz2lcOTLmhEXf9R+/NOmr0+mvUi4GerdA==",
   "success": true,
   "projectFilePath": "D:\\FSCRUD\\backend\\core\\core.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\afzaal\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
     "C:\\Users\\afzaal\\.nuget\\packages\\dotnetcore.cap\\7.0.0\\dotnetcore.cap.7.0.0.nupkg.sha512",
     "C:\\Users\\afzaal\\.nuget\\packages\\dotnetcore.cap.dashboard\\7.0.0\\dotnetcore.cap.dashboard.7.0.0.nupkg.sha512",
+    "C:\\Users\\afzaal\\.nuget\\packages\\dotnetcore.cap.mongodb\\7.0.0\\dotnetcore.cap.mongodb.7.0.0.nupkg.sha512",
     "C:\\Users\\afzaal\\.nuget\\packages\\dotnetcore.cap.rabbitmq\\7.0.0\\dotnetcore.cap.rabbitmq.7.0.0.nupkg.sha512",
     "C:\\Users\\afzaal\\.nuget\\packages\\dotnetcore.cap.sqlite\\7.0.0\\dotnetcore.cap.sqlite.7.0.0.nupkg.sha512",
     "C:\\Users\\afzaal\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
