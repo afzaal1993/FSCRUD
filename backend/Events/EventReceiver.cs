@@ -1,5 +1,6 @@
 ﻿using Common;
 using DotNetCore.CAP;
+using System.Drawing;
 
 namespace Events
 {
@@ -8,8 +9,26 @@ namespace Events
         [CapSubscribe("Events.AddStudentImage")]
         public void AddStudentImage(SaveStudentImage model)
         {
-            string a = "I am triggered";
-            string b = a;
+            try
+            {
+                string directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "Images");
+
+                if(!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
+                string filePath = Path.Combine(directoryPath, model.FileName);
+
+                using (FileStream fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    fileStream.Write(model.ImageData, 0, model.ImageData.Length);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

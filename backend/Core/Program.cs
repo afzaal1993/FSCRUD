@@ -47,8 +47,6 @@ builder.Services.AddCap(options =>
     options.UseDashboard();
 });
 
-builder.Services.AddTransient<Testing>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -55,7 +55,7 @@ namespace core.Controllers
                 using var memoryStream = new MemoryStream();
                 await model.formFile.CopyToAsync(memoryStream);
                 obj.ImageData = memoryStream.ToArray();
-                obj.FileName = fileName;
+                obj.FileName = fileName + Helper.GetFileExtension(obj.ImageData);
 
                 await _capPublisher.PublishAsync("Events.AddStudentImage", obj);
             }
@@ -159,6 +159,5 @@ namespace core.Controllers
 
             return Ok(ApiResponse<GetStudentCourseDto>.Success(dto));
         }
-
     }
 }
