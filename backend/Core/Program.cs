@@ -8,6 +8,7 @@ using static Dapper.SqlMapper;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Bson.Serialization;
+using core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,8 +43,11 @@ builder.Services.AddCap(options =>
         rabbitMqoptions.UserName = "admin";
         rabbitMqoptions.Password = "admin123456";
     });
+    options.DefaultGroupName = "fs-crud-proj";
     options.UseDashboard();
 });
+
+builder.Services.AddTransient<Testing>();
 
 var app = builder.Build();
 

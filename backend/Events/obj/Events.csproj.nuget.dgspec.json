@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Test\\FSCRUD\\backend\\Events\\Events.csproj": {}
+    "D:\\FSCRUD\\backend\\Events\\Events.csproj": {}
   },
   "projects": {
-    "D:\\Test\\FSCRUD\\backend\\Events\\Events.csproj": {
+    "D:\\FSCRUD\\backend\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Test\\FSCRUD\\backend\\Events\\Events.csproj",
-        "projectName": "Events",
-        "projectPath": "D:\\Test\\FSCRUD\\backend\\Events\\Events.csproj",
-        "packagesPath": "C:\\Users\\mafaroq\\.nuget\\packages\\",
-        "outputPath": "D:\\Test\\FSCRUD\\backend\\Events\\obj\\",
+        "projectUniqueName": "D:\\FSCRUD\\backend\\Common\\Common.csproj",
+        "projectName": "Common",
+        "projectPath": "D:\\FSCRUD\\backend\\Common\\Common.csproj",
+        "packagesPath": "C:\\Users\\afzaal\\.nuget\\packages\\",
+        "outputPath": "D:\\FSCRUD\\backend\\Common\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\mafaroq\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\afzaal\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,7 +42,85 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\FSCRUD\\backend\\Events\\Events.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\FSCRUD\\backend\\Events\\Events.csproj",
+        "projectName": "Events",
+        "projectPath": "D:\\FSCRUD\\backend\\Events\\Events.csproj",
+        "packagesPath": "C:\\Users\\afzaal\\.nuget\\packages\\",
+        "outputPath": "D:\\FSCRUD\\backend\\Events\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\afzaal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "D:\\FSCRUD\\backend\\Common\\Common.csproj": {
+                "projectPath": "D:\\FSCRUD\\backend\\Common\\Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
+            "DotNetCore.CAP": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "DotNetCore.CAP.Dashboard": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "DotNetCore.CAP.MongoDB": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "DotNetCore.CAP.RabbitMQ": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.14, )"
@@ -68,7 +149,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }
