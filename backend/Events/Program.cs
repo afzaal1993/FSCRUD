@@ -31,7 +31,7 @@ builder.Services.AddCap(options =>
         rabbitMqoptions.UserName = "admin";
         rabbitMqoptions.Password = "admin123456";
     });
-    options.DefaultGroupName = "fs-crud-proj";
+    //options.DefaultGroupName = "fs-crud-proj";
     options.UseDashboard();
 });
 
