@@ -39,23 +39,26 @@ namespace core.Controllers
         [ProducesResponseType(typeof(ApiResponse<string>), 201)]
         public async Task<IActionResult> Create([FromForm] StudentDto model)
         {
-            string fileName = Guid.NewGuid().ToString();
+            string fileName = "";
+            if (model.formFile != null)
+                fileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(model.formFile.FileName);
 
             var student = _mapper.Map<Student>(model);
 
             student.CreatedDate = Helper.GetDateAndTime();
+
             student.FileName = fileName;
 
             await _mongoDBContext.Students.InsertOneAsync(student);
 
-            if(model.formFile != null)
+            if (model.formFile != null)
             {
                 SaveStudentImage obj = new SaveStudentImage();
 
                 using var memoryStream = new MemoryStream();
                 await model.formFile.CopyToAsync(memoryStream);
                 obj.ImageData = memoryStream.ToArray();
-                obj.FileName = fileName + Helper.GetFileExtension(obj.ImageData);
+                obj.FileName = fileName;
 
                 await _capPublisher.PublishAsync("Events.AddStudentImage", obj);
             }
@@ -68,9 +71,19 @@ namespace core.Controllers
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
         public async Task<IActionResult> Update(string id, [FromForm] UpdateStudentDto model)
         {
+            string fileName = "";
+
             var documentId = new ObjectId(id);
 
             var filter = Builders<Student>.Filter.Eq("_id", documentId);
+
+            var existingStudent = await _mongoDBContext.Students.Find(filter).FirstOrDefaultAsync();
+
+
+            if(existingStudent == null)
+            {
+                return NotFound(ApiResponse<string>.NotFound());
+            }
 
             var update = Builders<Student>.Update
                             .Set(x => x.ModifiedBy, model.ModifiedBy)
@@ -83,13 +96,34 @@ namespace core.Controllers
                             .Set(x => x.IsActive, model.IsActive)
                             .Set(x => x.DateOfBirth, model.DateOfBirth);
 
+            if(model.formFile != null)
+            {
+                fileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(model.formFile.FileName);
+                update = update.Set(x => x.FileName, fileName);
+            }
 
             var updateResult = await _mongoDBContext.Students.UpdateOneAsync(filter, update);
 
             if (updateResult.ModifiedCount > 0)
+            {
+                if (model.formFile != null)
+                {
+                    SaveStudentImage obj = new SaveStudentImage();
+
+                    using var memoryStream = new MemoryStream();
+                    await model.formFile.CopyToAsync(memoryStream);
+                    obj.ImageData = memoryStream.ToArray();
+                    obj.FileName = fileName;
+                    obj.IsUpdate = true;
+                    obj.OldFileName = existingStudent.FileName;
+
+                    await _capPublisher.PublishAsync("Events.AddStudentImage", obj);
+                }
+
                 return Ok(ApiResponse<string>.Success());
+            }
             else
-                return BadRequest(ApiResponse<string>.Error());
+                return BadRequest(ApiResponse<string>.Error("No records were updated"));
         }
 
         [HttpGet]

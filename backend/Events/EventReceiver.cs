@@ -20,6 +20,11 @@ namespace Events
 
                 string filePath = Path.Combine(directoryPath, model.FileName);
 
+                if(model.IsUpdate)
+                {
+                    System.IO.File.Delete(System.IO.Path.Combine(directoryPath, model.OldFileName));
+                }
+
                 using (FileStream fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     fileStream.Write(model.ImageData, 0, model.ImageData.Length);
