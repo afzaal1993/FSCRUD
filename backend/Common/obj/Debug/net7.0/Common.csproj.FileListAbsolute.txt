@@ -21,3 +21,4 @@ D:\FSCRUD\backend\Common\obj\Debug\net7.0\Common.dll
 D:\FSCRUD\backend\Common\obj\Debug\net7.0\refint\Common.dll
 D:\FSCRUD\backend\Common\obj\Debug\net7.0\Common.pdb
 D:\FSCRUD\backend\Common\obj\Debug\net7.0\ref\Common.dll
+D:\FSCRUD\backend\Common\obj\Debug\net7.0\Common.csproj.AssemblyReference.cache

@@ -104,3 +104,10 @@ D:\FSCRUD\backend\Events\obj\Debug\net7.0\refint\Events.dll
 D:\FSCRUD\backend\Events\obj\Debug\net7.0\Events.pdb
 D:\FSCRUD\backend\Events\obj\Debug\net7.0\Events.genruntimeconfig.cache
 D:\FSCRUD\backend\Events\obj\Debug\net7.0\ref\Events.dll
+D:\FSCRUD\backend\Events\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\FSCRUD\backend\Events\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\FSCRUD\backend\Events\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+D:\FSCRUD\backend\Events\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+D:\FSCRUD\backend\Events\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\FSCRUD\backend\Events\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+D:\FSCRUD\backend\Events\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll

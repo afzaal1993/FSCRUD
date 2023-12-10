@@ -188,3 +188,10 @@ D:\FSCRUD\backend\core\bin\Debug\net7.0\runtimes\osx\native\libmongocrypt.dylib
 D:\FSCRUD\backend\core\bin\Debug\net7.0\runtimes\win\native\mongocrypt.dll
 D:\FSCRUD\backend\core\bin\Debug\net7.0\DotNetCore.CAP.MongoDB.dll
 D:\Test\FSCRUD\backend\core\bin\Debug\net7.0\DotNetCore.CAP.MongoDB.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+D:\FSCRUD\backend\core\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
