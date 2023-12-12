@@ -2,6 +2,7 @@ using Common;
 using IAM.Helpers;
 using IAM.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.OpenApi.Models;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 
@@ -45,6 +46,33 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
 //});
 
 builder.Services.AddJwtAuthentication(builder.Configuration);
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Description = "Please insert authorization token",
+        Name = "Authorization",
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "bearer"
+    });
+    c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference=new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
 
 var app = builder.Build();
 

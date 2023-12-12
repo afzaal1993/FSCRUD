@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Bson.Serialization;
 using core;
+using Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddJwtAuthentication(builder.Configuration);
 
 builder.Services.AddDbContext<CoreDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
 
@@ -58,6 +61,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

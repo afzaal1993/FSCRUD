@@ -11,6 +11,42 @@
           "Port": 7220
         }
       ]
+    },
+    {
+      "UpstreamPathTemplate": "/Batch/{everything}",
+      "UpstreamHttpMethod": [ "Post", "GET" ],
+      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/Batch/{everything}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7095
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/Course/{everything}",
+      //"UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/Course/{everything}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7095
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/Student/{everything}",
+      //"UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/Student/{everything}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7095
+        }
+      ]
     }
   ],
   "AuthenticationOptions": {

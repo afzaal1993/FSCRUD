@@ -9,6 +9,7 @@ using core.DTOs;
 using Core.Data;
 using Core.DTOs;
 using Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Bson;
@@ -17,6 +18,7 @@ using MongoDB.Entities;
 
 namespace Core.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class BatchController : ControllerBase
@@ -30,7 +32,6 @@ namespace Core.Controllers
             _mapper = mapper;
             _mongoDBContext = mongoDBContext;
         }
-
 
         [HttpPost]
         [Route("Create")]

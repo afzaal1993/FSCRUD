@@ -9,6 +9,7 @@ using core.Data;
 using Core.Data;
 using Core.DTOs;
 using Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Bson;
@@ -18,6 +19,7 @@ using Newtonsoft.Json;
 
 namespace Core.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CourseController : ControllerBase

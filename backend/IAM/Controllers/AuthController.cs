@@ -1,6 +1,7 @@
 ﻿using Common;
 using IAM.DTOs;
 using IAM.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -104,6 +105,7 @@ namespace IAM.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         [Route("CreateRole")]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
