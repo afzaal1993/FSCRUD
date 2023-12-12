@@ -1,0 +1,22 @@
+{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/auth/{everything}",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/auth/{everything}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7220
+        }
+      ]
+    }
+  ],
+  "AuthenticationOptions": {
+    "AuthenticationProviderKey" : "Bearer"
+  },
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7161"
+  }
+}
