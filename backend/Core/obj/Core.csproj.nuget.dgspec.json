@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FSCRUD\\backend\\core\\core.csproj": {}
+    "D:\\FSCRUD\\backend\\Core\\Core.csproj": {}
   },
   "projects": {
     "D:\\FSCRUD\\backend\\Common\\Common.csproj": {
@@ -76,14 +76,14 @@
         }
       }
     },
-    "D:\\FSCRUD\\backend\\core\\core.csproj": {
+    "D:\\FSCRUD\\backend\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FSCRUD\\backend\\core\\core.csproj",
-        "projectName": "core",
-        "projectPath": "D:\\FSCRUD\\backend\\core\\core.csproj",
+        "projectUniqueName": "D:\\FSCRUD\\backend\\Core\\Core.csproj",
+        "projectName": "Core",
+        "projectPath": "D:\\FSCRUD\\backend\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\afzaal\\.nuget\\packages\\",
-        "outputPath": "D:\\FSCRUD\\backend\\core\\obj\\",
+        "outputPath": "D:\\FSCRUD\\backend\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

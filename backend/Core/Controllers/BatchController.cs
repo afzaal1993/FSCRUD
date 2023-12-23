@@ -46,7 +46,7 @@ namespace Core.Controllers
         }
 
         [HttpPut]
-        [Route("Update")]
+        [Route("Update/{id}")]
         [ProducesResponseType(typeof(ApiResponse<string>), 200)]
         public async Task<IActionResult> Update(string id, BatchDto model)
         {
@@ -84,7 +84,7 @@ namespace Core.Controllers
         }
 
         [HttpGet]
-        [Route("GetById")]
+        [Route("GetById/{id}")]
         [ProducesResponseType(typeof(ApiResponse<GetBatchDto>), 200)]
         public async Task<IActionResult> GetAll(string id)
         {
@@ -99,7 +99,8 @@ namespace Core.Controllers
         }
 
         [HttpDelete]
-        [Route("Delete")]
+        [Route("Delete/{id}")]
+        [ProducesResponseType(typeof(ApiResponse<string>), 200)]
         public async Task<IActionResult> Delete(string id)
         {
             var result = await _mongoDBContext.Batches.Find(b => b.Id == ObjectId.Parse(id)).FirstOrDefaultAsync();
@@ -109,7 +110,7 @@ namespace Core.Controllers
 
             await _mongoDBContext.Batches.DeleteOneAsync(b => b.Id == ObjectId.Parse(id));
 
-            return Ok(ApiResponse<GetBatchDto>.Success());
+            return Ok(ApiResponse<string>.Success());
         }
     }
 }

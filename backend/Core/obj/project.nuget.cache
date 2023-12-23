@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xaRBCQFLa2wvJh0AcrLC6n8rNDDlifRDoY5eNKjpZ7u77/qgwsxyWdYxacB59SvDdzCOhLNxd8d42bX7xAR55A==",
+  "dgSpecHash": "ToOK2bw6LbGIViFVSJtOThLG1fe1ITAWx0WcdcTOfHvE47zqH7zhNRcMXxBjhEcO6+3jTVX7n8Z09uacTyHrgw==",
   "success": true,
-  "projectFilePath": "D:\\FSCRUD\\backend\\core\\core.csproj",
+  "projectFilePath": "D:\\FSCRUD\\backend\\Core\\Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\afzaal\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\afzaal\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
